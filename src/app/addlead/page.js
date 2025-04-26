@@ -78,28 +78,45 @@ export default function AddLeadPage() {
         setIsSubmitting(true)
 
         try {
-            // In a real application, you would send this data to your API
-            console.log(values)
+            const response = await fetch('/api/leads', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: `${values.firstName} ${values.lastName}`,
+                    email: values.email,
+                    phone: values.phone,
+                    company: values.company,
+                    jobTitle: values.jobTitle,
+                    leadSource: values.leadSource,
+                    status: values.status,
+                    notes: values.notes
+                }),
+            });
 
-            // Simulate API call
-            await new Promise((resolve) => setTimeout(resolve, 1000))
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.error || 'Failed to submit lead');
+            }
 
             toast.success("Lead added successfully", {
                 description: `${values.firstName} ${values.lastName} has been added to your leads.`
-            })
+            });
 
             // Reset form
-            form.reset()
+            form.reset();
 
             // Optionally redirect to leads list
             // router.push("/leads")
         } catch (error) {
             toast.error("Error", {
-                description: "There was a problem adding the lead. Please try again."
-            })
-            console.error(error)
+                description: error.message || "There was a problem adding the lead. Please try again."
+            });
+            console.error(error);
         } finally {
-            setIsSubmitting(false)
+            setIsSubmitting(false);
         }
     }
 
