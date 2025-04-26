@@ -103,235 +103,189 @@ export default function AddLeadPage() {
         }
     }
 
-    return (
-        <div className="flex min-h-screen flex-col">
-            <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-                <div className="container flex h-16 items-center justify-between">
-                    <div className="flex items-center gap-2">
-                        <Database className="h-6 w-6" />
-                        <span className="text-xl font-bold">Lead Management System</span>
+    return (<div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <div className="mx-auto max-w-2xl space-y-8">
+            <div>
+                <h1 className="text-3xl font-bold tracking-tight">Add New Lead</h1>
+                <p className="text-muted-foreground mt-2">
+                    Enter the details of your new lead. Fields marked with * are required.
+                </p>
+            </div>
+
+            <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                    <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                        <FormField
+                            control={form.control}
+                            name="firstName"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>First Name *</FormLabel>
+                                    <FormControl>
+                                        <Input placeholder="John" {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="lastName"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Last Name *</FormLabel>
+                                    <FormControl>
+                                        <Input placeholder="Doe" {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
                     </div>
-                    <nav className="hidden md:flex gap-6">
-                        <Link href="/" className="text-sm font-medium hover:underline underline-offset-4">
-                            Home
-                        </Link>
-                        <Link href="#" className="text-sm font-medium hover:underline underline-offset-4">
-                            Leads
-                        </Link>
-                        <Link href="#" className="text-sm font-medium hover:underline underline-offset-4">
-                            Reports
-                        </Link>
-                        <Link href="#" className="text-sm font-medium hover:underline underline-offset-4">
-                            Settings
-                        </Link>
-                    </nav>
-                    <Button variant="outline">Dashboard</Button>
-                </div>
-            </header>
 
-            <main className="flex-1 container py-10">
-                <div className="mx-auto max-w-3xl space-y-8">
-                    <div>
-                        <h1 className="text-3xl font-bold tracking-tight">Add New Lead</h1>
-                        <p className="text-muted-foreground mt-2">
-                            Enter the details of your new lead. Fields marked with * are required.
-                        </p>
+                    <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                        <FormField
+                            control={form.control}
+                            name="email"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Email Address *</FormLabel>
+                                    <FormControl>
+                                        <Input placeholder="john.doe@example.com" type="email" {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="phone"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Phone Number</FormLabel>
+                                    <FormControl>
+                                        <Input placeholder="(123) 456-7890" {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
                     </div>
 
-                    <Form {...form}>
-                        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                                <FormField
-                                    control={form.control}
-                                    name="firstName"
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel>First Name *</FormLabel>
-                                            <FormControl>
-                                                <Input placeholder="John" {...field} />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
-                                <FormField
-                                    control={form.control}
-                                    name="lastName"
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel>Last Name *</FormLabel>
-                                            <FormControl>
-                                                <Input placeholder="Doe" {...field} />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
-                            </div>
+                    <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                        <FormField
+                            control={form.control}
+                            name="company"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Company</FormLabel>
+                                    <FormControl>
+                                        <Input placeholder="Acme Inc." {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="jobTitle"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Job Title</FormLabel>
+                                    <FormControl>
+                                        <Input placeholder="Marketing Manager" {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                    </div>
 
-                            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                                <FormField
-                                    control={form.control}
-                                    name="email"
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel>Email Address *</FormLabel>
-                                            <FormControl>
-                                                <Input placeholder="john.doe@example.com" type="email" {...field} />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
-                                <FormField
-                                    control={form.control}
-                                    name="phone"
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel>Phone Number</FormLabel>
-                                            <FormControl>
-                                                <Input placeholder="(123) 456-7890" {...field} />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
-                            </div>
-
-                            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                                <FormField
-                                    control={form.control}
-                                    name="company"
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel>Company</FormLabel>
-                                            <FormControl>
-                                                <Input placeholder="Acme Inc." {...field} />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
-                                <FormField
-                                    control={form.control}
-                                    name="jobTitle"
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel>Job Title</FormLabel>
-                                            <FormControl>
-                                                <Input placeholder="Marketing Manager" {...field} />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
-                            </div>
-
-                            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                                <FormField
-                                    control={form.control}
-                                    name="leadSource"
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel>Lead Source *</FormLabel>
-                                            <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                                <FormControl>
-                                                    <SelectTrigger>
-                                                        <SelectValue placeholder="Select a lead source" />
-                                                    </SelectTrigger>
-                                                </FormControl>
-                                                <SelectContent>
-                                                    <SelectItem value="website">Website</SelectItem>
-                                                    <SelectItem value="referral">Referral</SelectItem>
-                                                    <SelectItem value="social_media">Social Media</SelectItem>
-                                                    <SelectItem value="email_campaign">Email Campaign</SelectItem>
-                                                    <SelectItem value="event">Event</SelectItem>
-                                                    <SelectItem value="cold_call">Cold Call</SelectItem>
-                                                    <SelectItem value="other">Other</SelectItem>
-                                                </SelectContent>
-                                            </Select>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
-                                <FormField
-                                    control={form.control}
-                                    name="status"
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel>Status *</FormLabel>
-                                            <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                                <FormControl>
-                                                    <SelectTrigger>
-                                                        <SelectValue placeholder="Select a status" />
-                                                    </SelectTrigger>
-                                                </FormControl>
-                                                <SelectContent>
-                                                    <SelectItem value="new">New</SelectItem>
-                                                    <SelectItem value="contacted">Contacted</SelectItem>
-                                                    <SelectItem value="qualified">Qualified</SelectItem>
-                                                    <SelectItem value="proposal">Proposal</SelectItem>
-                                                    <SelectItem value="negotiation">Negotiation</SelectItem>
-                                                    <SelectItem value="won">Won</SelectItem>
-                                                    <SelectItem value="lost">Lost</SelectItem>
-                                                </SelectContent>
-                                            </Select>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
-                            </div>
-
-                            <FormField
-                                control={form.control}
-                                name="notes"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Notes</FormLabel>
+                    <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                        <FormField
+                            control={form.control}
+                            name="leadSource"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Lead Source *</FormLabel>
+                                    <Select onValueChange={field.onChange} defaultValue={field.value}>
                                         <FormControl>
-                                            <Textarea
-                                                placeholder="Add any additional information about this lead..."
-                                                className="min-h-[120px]"
-                                                {...field}
-                                            />
+                                            <SelectTrigger>
+                                                <SelectValue placeholder="Select a lead source" />
+                                            </SelectTrigger>
                                         </FormControl>
-                                        <FormDescription>Maximum 500 characters</FormDescription>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-
-                            <div className="flex justify-end gap-4">
-                                <Button variant="outline" type="button" onClick={() => form.reset()}>
-                                    Cancel
-                                </Button>
-                                <Button type="submit" disabled={isSubmitting}>
-                                    {isSubmitting ? "Saving..." : "Add Lead"}
-                                </Button>
-                            </div>
-                        </form>
-                    </Form>
-                </div>
-            </main>
-
-            <footer className="w-full border-t py-6 md:py-0">
-                <div className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
-                    <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
-                        © {new Date().getFullYear()} Lead Management System. All rights reserved.
-                    </p>
-                    <div className="flex gap-4">
-                        <Link href="#" className="text-sm text-muted-foreground hover:underline underline-offset-4">
-                            Privacy Policy
-                        </Link>
-                        <Link href="#" className="text-sm text-muted-foreground hover:underline underline-offset-4">
-                            Terms of Service
-                        </Link>
-                        <Link href="#" className="text-sm text-muted-foreground hover:underline underline-offset-4">
-                            Contact
-                        </Link>
+                                        <SelectContent>
+                                            <SelectItem value="website">Website</SelectItem>
+                                            <SelectItem value="referral">Referral</SelectItem>
+                                            <SelectItem value="social_media">Social Media</SelectItem>
+                                            <SelectItem value="email_campaign">Email Campaign</SelectItem>
+                                            <SelectItem value="event">Event</SelectItem>
+                                            <SelectItem value="cold_call">Cold Call</SelectItem>
+                                            <SelectItem value="other">Other</SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="status"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Status *</FormLabel>
+                                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                        <FormControl>
+                                            <SelectTrigger>
+                                                <SelectValue placeholder="Select a status" />
+                                            </SelectTrigger>
+                                        </FormControl>
+                                        <SelectContent>
+                                            <SelectItem value="new">New</SelectItem>
+                                            <SelectItem value="contacted">Contacted</SelectItem>
+                                            <SelectItem value="qualified">Qualified</SelectItem>
+                                            <SelectItem value="proposal">Proposal</SelectItem>
+                                            <SelectItem value="negotiation">Negotiation</SelectItem>
+                                            <SelectItem value="won">Won</SelectItem>
+                                            <SelectItem value="lost">Lost</SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
                     </div>
-                </div>
-            </footer>
+
+                    <FormField
+                        control={form.control}
+                        name="notes"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Notes</FormLabel>
+                                <FormControl>
+                                    <Textarea
+                                        placeholder="Add any additional information about this lead..."
+                                        className="min-h-[120px]"
+                                        {...field}
+                                    />
+                                </FormControl>
+                                <FormDescription>Maximum 500 characters</FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+
+                    <div className="flex justify-end gap-4">
+                        <Button variant="outline" type="button" onClick={() => form.reset()}>
+                            Cancel
+                        </Button>
+                        <Button type="submit" disabled={isSubmitting}>
+                            {isSubmitting ? "Saving..." : "Add Lead"}
+                        </Button>
+                    </div>
+                </form>
+            </Form>
         </div>
+    </div>
     )
 }
