@@ -3,7 +3,7 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/sonner"
 import Footer from "@/components/ui/Footer";
 import { ThemeProvider } from "@/components/theme-provider"
-
+import { TanstackProvider } from "@/components/tanstack-provider";
 
 export const metadata = {
   title: "Create Next App",
@@ -20,12 +20,14 @@ export default function RootLayout({ children }) {
           enableSystem
           disableTransitionOnChange
         >
-          <Header />
-          <main className="flex-1">
-            {children}
-          </main>
-          <Footer />
-          <Toaster />
+          <TanstackProvider>
+            <Header />
+            <main className="flex-1">
+              {children}
+            </main>
+            <Footer />
+            <Toaster />
+          </TanstackProvider>
         </ThemeProvider>
       </body>
     </html>
