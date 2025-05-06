@@ -9,7 +9,7 @@ const seedData = [
         company: "Tech Corp",
         jobTitle: "Software Engineer",
         leadSource: "Website",
-        status: "New",
+        status: "new",
         notes: "Interested in our enterprise solution"
     },
     {
@@ -19,7 +19,7 @@ const seedData = [
         company: "Digital Solutions",
         jobTitle: "Marketing Manager",
         leadSource: "Referral",
-        status: "Contacted",
+        status: "contacted",
         notes: "Follow up next week"
     },
     {
@@ -29,7 +29,7 @@ const seedData = [
         company: "Global Industries",
         jobTitle: "CEO",
         leadSource: "LinkedIn",
-        status: "Qualified",
+        status: "qualified",
         notes: "High potential client"
     }
 ];
