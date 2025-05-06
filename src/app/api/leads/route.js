@@ -92,10 +92,17 @@ export async function GET(request) {
             .limit(limit)
             .offset(offset);
 
+        // Serialize the data
+        const serializedLeads = allLeads.map(lead => ({
+            ...lead,
+            createdAt: lead.createdAt?.toISOString(),
+            updatedAt: lead.updatedAt?.toISOString()
+        }));
+
         return NextResponse.json(
             {
                 message: 'Leads fetched successfully',
-                data: allLeads,
+                data: serializedLeads,
                 pagination: {
                     total: count,
                     page,
