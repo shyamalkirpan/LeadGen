@@ -232,13 +232,13 @@ export default function AddLeadPage() {
                                             </SelectTrigger>
                                         </FormControl>
                                         <SelectContent>
-                                            <SelectItem value="website">Website</SelectItem>
-                                            <SelectItem value="referral">Referral</SelectItem>
-                                            <SelectItem value="social_media">Social Media</SelectItem>
-                                            <SelectItem value="email_campaign">Email Campaign</SelectItem>
-                                            <SelectItem value="event">Event</SelectItem>
-                                            <SelectItem value="cold_call">Cold Call</SelectItem>
-                                            <SelectItem value="other">Other</SelectItem>
+                                            <SelectItem value="Website">Website</SelectItem>
+                                            <SelectItem value="Referral">Referral</SelectItem>
+                                            <SelectItem value="Social Media">Social Media</SelectItem>
+                                            <SelectItem value="Email Campaign">Email Campaign</SelectItem>
+                                            <SelectItem value="Event">Event</SelectItem>
+                                            <SelectItem value="Cold Call">Cold Call</SelectItem>
+                                            <SelectItem value="Other">Other</SelectItem>
                                         </SelectContent>
                                     </Select>
                                     <FormMessage />
