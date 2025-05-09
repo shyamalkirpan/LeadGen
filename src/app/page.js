@@ -1,103 +1,209 @@
-import Image from "next/image";
+"use client"
 
-export default function Home() {
+import Link from "next/link"
+import { Database, Users, BarChart3, PlusCircle } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { BackgroundBeams } from "@/components/ui/background-beams"
+import { CardContainer, CardBody, CardItem } from "@/components/ui/3d-card"
+import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect"
+import { AnimatedTooltip } from "@/components/ui/animated-tooltip"
+// , CardHoverEffect, TypewriterEffect, AnimatedTooltip } from "@/components/ui/aceternity"
+import { motion } from "framer-motion"
+
+const tooltipItems = [
+  {
+    id: 1,
+    name: "Lead Management",
+    designation: "Centralized Lead Tracking",
+    image: <Database className="h-14 w-14 text-blue-600" />
+  },
+  {
+    id: 2,
+    name: "Contact Details",
+    designation: "Comprehensive Information",
+    image: <Users className="h-14 w-14 text-blue-600" />
+  },
+  {
+    id: 3,
+    name: "Lead Tracking",
+    designation: "Pipeline Monitoring",
+    image: <BarChart3 className="h-14 w-14 text-blue-600" />
+  }
+];
+
+export default function HomePage() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="flex flex-col min-h-screen">
+      {/* Hero Section */}
+      <section className="relative h-screen flex items-center justify-center overflow-hidden bg-white dark:bg-gray-950">
+        <BackgroundBeams className="z-0" />
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="max-w-3xl mx-auto text-center">
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="text-4xl sm:text-5xl font-bold tracking-tight mb-6 text-gray-900 dark:text-white"
+            >
+              Streamline Your Lead Management
+            </motion.h1>
+            <div className="flex flex-col items-center justify-center">
+              <TypewriterEffectSmooth
+                words={[
+                  {
+                    text: "Organize ",
+                  },
+                  {
+                    text: "track ",
+                  },
+                  {
+                    text: "and ",
+                  },
+                  {
+                    text: "convert ",
+                  },
+                  {
+                    text: "your ",
+                  },
+                  {
+                    text: "leads ",
+                  },
+                  {
+                    text: "with ",
+                  },
+                  {
+                    text: "our ",
+                  },
+                  {
+                    text: "powerful ",
+                  },
+                  {
+                    text: "CRM ",
+                  },
+                  {
+                    text: "solution",
+                    className: "text-blue-500 dark:text-blue-500",
+                  },
+                ]}
+                className="text-center"
+              />
+            </div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="flex flex-col sm:flex-row gap-4 justify-center mt-8"
+            >
+              <Button asChild size="lg" className="bg-white text-blue-600 hover:bg-blue-50">
+                <Link href="/addlead">
+                  <PlusCircle className="mr-2 h-5 w-5" />
+                  Add New Lead
+                </Link>
+              </Button>
+              <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-blue-700">
+                <Link href="/leads">
+                  <Users className="mr-2 h-5 w-5" />
+                  View All Leads
+                </Link>
+              </Button>
+            </motion.div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-20 bg-gray-50 dark:bg-gray-900">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              Everything You Need to Manage Leads
+            </h2>
+            <p className="text-xl text-gray-700 dark:text-gray-200">
+              Powerful features to help you convert more leads into customers
+            </p>
+          </motion.div>
+
+          <div className="flex justify-center mb-16">
+            <AnimatedTooltip items={tooltipItems} />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <CardContainer className="w-full">
+              <CardBody className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-sm">
+                <CardItem translateZ="50px" className="w-full">
+                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-6">
+                    <Database className="h-6 w-6 text-blue-600" />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Lead Management</h3>
+                  <p className="text-gray-700 dark:text-gray-200">
+                    Easily add, organize, and track all your leads in one centralized location.
+                  </p>
+                </CardItem>
+              </CardBody>
+            </CardContainer>
+
+            <CardContainer className="w-full">
+              <CardBody className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-sm">
+                <CardItem translateZ="50px" className="w-full">
+                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-6">
+                    <Users className="h-6 w-6 text-blue-600" />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Contact Details</h3>
+                  <p className="text-gray-700 dark:text-gray-200">
+                    Store comprehensive contact information and interaction history for each lead.
+                  </p>
+                </CardItem>
+              </CardBody>
+            </CardContainer>
+
+            <CardContainer className="w-full">
+              <CardBody className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-sm">
+                <CardItem translateZ="50px" className="w-full">
+                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-6">
+                    <BarChart3 className="h-6 w-6 text-blue-600" />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Lead Tracking</h3>
+                  <p className="text-gray-700 dark:text-gray-200">
+                    Monitor lead status and progress through your sales pipeline.
+                  </p>
+                </CardItem>
+              </CardBody>
+            </CardContainer>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="bg-white dark:bg-gray-950 py-20">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="max-w-3xl mx-auto text-center"
+          >
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              Ready to Get Started?
+            </h2>
+            <p className="text-xl text-gray-700 dark:text-gray-200 mb-8">
+              Start managing your leads more effectively today.
+            </p>
+            <Button asChild size="lg" className="bg-blue-600 hover:bg-blue-700">
+              <Link href="/addlead">
+                <PlusCircle className="mr-2 h-5 w-5" />
+                Add Your First Lead
+              </Link>
+            </Button>
+          </motion.div>
+        </div>
+      </section>
     </div>
-  );
+  )
 }
