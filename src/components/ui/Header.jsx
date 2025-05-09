@@ -17,7 +17,7 @@ export default function Header() {
 
     const navItems = [
         { href: "/", label: "Home" },
-        { href: "/leads", label: "Leads" },
+        { href: "/leads", label: "Leads", prefetch: true },
         { href: "/addlead", label: "Add Lead" },
         { href: "/about", label: "About" },
         { href: "#", label: "Settings" },
@@ -37,6 +37,7 @@ export default function Header() {
                         <Link
                             key={item.href}
                             href={item.href}
+                            {...item.prefetch && { prefetch: true }}
                             className="text-sm font-medium hover:underline underline-offset-4"
                         >
                             {item.label}
@@ -46,7 +47,7 @@ export default function Header() {
 
                 <div className="flex items-center gap-4 absolute right-4">
                     <ModeToggle />
-                    <Button variant="outline" className="hidden md:flex">Dashboard</Button>
+                    <Link href={'/leads'} prefetch = {true}> <Button variant="outline" className="hidden md:flex">Dashboard</Button></Link>
 
                     {/* Mobile Navigation */}
                     <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -68,7 +69,7 @@ export default function Header() {
                                         {item.label}
                                     </Link>
                                 ))}
-                                <Button variant="outline" className="mt-4">Dashboard</Button>
+                                <Link href={'/leads'} prefetch = {true} > <Button variant="outline">Dashboard</Button></Link>
                             </nav>
                         </SheetContent>
                     </Sheet>
