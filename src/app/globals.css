@@ -78,6 +78,79 @@
   --sidebar-ring: oklch(0.645 0.246 16.439);
 }
 
+/* Theme Color Variations */
+[data-theme-color="blue"] {
+  --primary: oklch(0.55 0.2 240);
+  --primary-foreground: oklch(0.98 0.01 240);
+  --ring: oklch(0.55 0.2 240);
+  --sidebar-primary: oklch(0.55 0.2 240);
+  --sidebar-ring: oklch(0.55 0.2 240);
+}
+
+[data-theme-color="green"] {
+  --primary: oklch(0.55 0.2 140);
+  --primary-foreground: oklch(0.98 0.01 140);
+  --ring: oklch(0.55 0.2 140);
+  --sidebar-primary: oklch(0.55 0.2 140);
+  --sidebar-ring: oklch(0.55 0.2 140);
+}
+
+[data-theme-color="purple"] {
+  --primary: oklch(0.55 0.2 280);
+  --primary-foreground: oklch(0.98 0.01 280);
+  --ring: oklch(0.55 0.2 280);
+  --sidebar-primary: oklch(0.55 0.2 280);
+  --sidebar-ring: oklch(0.55 0.2 280);
+}
+
+[data-theme-color="orange"] {
+  --primary: oklch(0.65 0.2 60);
+  --primary-foreground: oklch(0.98 0.01 60);
+  --ring: oklch(0.65 0.2 60);
+  --sidebar-primary: oklch(0.65 0.2 60);
+  --sidebar-ring: oklch(0.65 0.2 60);
+}
+
+[data-theme-color="pink"] {
+  --primary: oklch(0.65 0.2 340);
+  --primary-foreground: oklch(0.98 0.01 340);
+  --ring: oklch(0.65 0.2 340);
+  --sidebar-primary: oklch(0.65 0.2 340);
+  --sidebar-ring: oklch(0.65 0.2 340);
+}
+
+[data-theme-color="red"] {
+  --primary: oklch(0.65 0.2 25);
+  --primary-foreground: oklch(0.98 0.01 25);
+  --ring: oklch(0.65 0.2 25);
+  --sidebar-primary: oklch(0.65 0.2 25);
+  --sidebar-ring: oklch(0.65 0.2 25);
+}
+
+[data-theme-color="yellow"] {
+  --primary: oklch(0.85 0.2 85);
+  --primary-foreground: oklch(0.2 0.01 85);
+  --ring: oklch(0.85 0.2 85);
+  --sidebar-primary: oklch(0.85 0.2 85);
+  --sidebar-ring: oklch(0.85 0.2 85);
+}
+
+[data-theme-color="violet"] {
+  --primary: oklch(0.65 0.2 290);
+  --primary-foreground: oklch(0.98 0.01 290);
+  --ring: oklch(0.65 0.2 290);
+  --sidebar-primary: oklch(0.65 0.2 290);
+  --sidebar-ring: oklch(0.65 0.2 290);
+}
+
+[data-theme-color="default"] {
+  --primary: oklch(0.645 0.246 16.439);
+  --primary-foreground: oklch(0.969 0.015 12.422);
+  --ring: oklch(0.645 0.246 16.439);
+  --sidebar-primary: oklch(0.645 0.246 16.439);
+  --sidebar-ring: oklch(0.645 0.246 16.439);
+}
+
 .dark {
   --background: oklch(0.141 0.005 285.823);
   --foreground: oklch(0.985 0 0);
@@ -112,7 +185,69 @@
   --sidebar-ring: oklch(0.645 0.246 16.439);
 }
 
+/* Dark Theme Color Variations */
+.dark[data-theme-color="blue"] {
+  --primary: oklch(0.65 0.2 240);
+  --ring: oklch(0.65 0.2 240);
+  --sidebar-primary: oklch(0.65 0.2 240);
+  --sidebar-ring: oklch(0.65 0.2 240);
+}
 
+.dark[data-theme-color="green"] {
+  --primary: oklch(0.65 0.2 140);
+  --ring: oklch(0.65 0.2 140);
+  --sidebar-primary: oklch(0.65 0.2 140);
+  --sidebar-ring: oklch(0.65 0.2 140);
+}
+
+.dark[data-theme-color="purple"] {
+  --primary: oklch(0.65 0.2 280);
+  --ring: oklch(0.65 0.2 280);
+  --sidebar-primary: oklch(0.65 0.2 280);
+  --sidebar-ring: oklch(0.65 0.2 280);
+}
+
+.dark[data-theme-color="orange"] {
+  --primary: oklch(0.75 0.2 60);
+  --ring: oklch(0.75 0.2 60);
+  --sidebar-primary: oklch(0.75 0.2 60);
+  --sidebar-ring: oklch(0.75 0.2 60);
+}
+
+.dark[data-theme-color="pink"] {
+  --primary: oklch(0.75 0.2 340);
+  --ring: oklch(0.75 0.2 340);
+  --sidebar-primary: oklch(0.75 0.2 340);
+  --sidebar-ring: oklch(0.75 0.2 340);
+}
+
+.dark[data-theme-color="red"] {
+  --primary: oklch(0.75 0.2 25);
+  --ring: oklch(0.75 0.2 25);
+  --sidebar-primary: oklch(0.75 0.2 25);
+  --sidebar-ring: oklch(0.75 0.2 25);
+}
+
+.dark[data-theme-color="yellow"] {
+  --primary: oklch(0.95 0.2 85);
+  --ring: oklch(0.95 0.2 85);
+  --sidebar-primary: oklch(0.95 0.2 85);
+  --sidebar-ring: oklch(0.95 0.2 85);
+}
+
+.dark[data-theme-color="violet"] {
+  --primary: oklch(0.75 0.2 290);
+  --ring: oklch(0.75 0.2 290);
+  --sidebar-primary: oklch(0.75 0.2 290);
+  --sidebar-ring: oklch(0.75 0.2 290);
+}
+
+.dark[data-theme-color="default"] {
+  --primary: oklch(0.645 0.246 16.439);
+  --ring: oklch(0.645 0.246 16.439);
+  --sidebar-primary: oklch(0.645 0.246 16.439);
+  --sidebar-ring: oklch(0.645 0.246 16.439);
+}
 
 @layer base {
   * {

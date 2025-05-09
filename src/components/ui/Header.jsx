@@ -20,7 +20,7 @@ const NAV_ITEMS = [
     { href: "/", label: "Home", icon: Home },
     { href: "/leads", label: "Leads", prefetch: true, icon: Users },
     { href: "/about", label: "About", icon: Info },
-    { href: "#", label: "Settings", icon: Settings },
+    { href: "/settings", label: "Settings", icon: Settings },
 ]
 
 export default function Header() {
