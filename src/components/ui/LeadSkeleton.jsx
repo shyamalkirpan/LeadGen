@@ -1,8 +1,5 @@
 import { Skeleton } from "@/components/ui/skeleton"
 
-
-
-
 export default function LeadSkeleton() {
     return (
         <div className="rounded-md border">

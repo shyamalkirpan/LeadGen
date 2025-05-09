@@ -47,7 +47,7 @@ export default function Header() {
 
                 <div className="flex items-center gap-4 absolute right-4">
                     <ModeToggle />
-                    <Link href={'/leads'} prefetch = {true}> <Button variant="outline" className="hidden md:flex">Dashboard</Button></Link>
+                    <Link href={'/leads'} prefetch={true}> <Button variant="outline" className="hidden md:flex">Dashboard</Button></Link>
 
                     {/* Mobile Navigation */}
                     <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -69,7 +69,7 @@ export default function Header() {
                                         {item.label}
                                     </Link>
                                 ))}
-                                <Link href={'/leads'} prefetch = {true} > <Button variant="outline">Dashboard</Button></Link>
+                                <Link href={'/leads'} prefetch={true} > <Button variant="outline">Dashboard</Button></Link>
                             </nav>
                         </SheetContent>
                     </Sheet>

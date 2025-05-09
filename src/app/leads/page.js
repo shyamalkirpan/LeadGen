@@ -22,8 +22,8 @@ export default function LeadsPage() {
                 <p className="mt-4">This is the leads page.</p>
                 <p className="mt-4">You can manage your leads here.</p>
                 <AddNewLead />
-                {(isPending || isFetching) ? <LeadSkeleton/> : 
-                <DataTable columns={columns} data={data.data} />}
+                {(isPending || isFetching) ? <LeadSkeleton /> :
+                    <DataTable columns={columns} data={data.data} />}
             </div>
         </>
     )
