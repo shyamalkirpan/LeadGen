@@ -47,7 +47,7 @@ export default function Footer() {
                                             "group"
                                         )}
                                     >
-                                        <Icon className="h-4 w-4 transition-transform group-hover:scale-110" />
+                                        <Icon className="h-5 w-5 transition-transform group-hover:scale-110" />
                                         {link.label}
                                     </Link>
                                 )
@@ -70,7 +70,7 @@ export default function Footer() {
                                     <svg
                                         role="img"
                                         viewBox="0 0 24 24"
-                                        className="h-4 w-4"
+                                        className="h-5 w-5"
                                         fill="currentColor"
                                         dangerouslySetInnerHTML={{ __html: siGithub.svg }}
                                     />
