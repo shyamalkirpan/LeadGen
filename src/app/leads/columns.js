@@ -5,6 +5,7 @@ import { ArrowUpDown } from "lucide-react"
 import { MoreHorizontal } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { toast } from "sonner"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 
 import {
     DropdownMenu,
@@ -15,25 +16,69 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
-export const deleteLead = async (leadId) => {
-    const response = await fetch(`/api/leads/${leadId}`, {
-        method: "DELETE",
+const useDeleteLead = () => {
+    const queryClient = useQueryClient()
+
+    return useMutation({
+        mutationFn: async (leadId) => {
+            const response = await fetch(`/api/leads/${leadId}`, {
+                method: "DELETE",
+            })
+
+            if (!response.ok) {
+                throw new Error("Failed to delete lead")
+            }
+
+            return response.json()
+        },
+        onSuccess: (data) => {
+            queryClient.invalidateQueries({ queryKey: ['data'] })
+            toast.success("Lead Deleted successfully", {
+                description: `${data.data.name} has been removed from your leads.`
+            })
+        },
+        onError: (error) => {
+            console.error("Failed to delete lead", error)
+            toast.error("Failed to delete lead", {
+                description: `Lead could not be deleted. Please try again later.`,
+            })
+        }
     })
+}
 
-    if (!response.ok) {
-        console.error("Failed to delete lead")
-        toast.error("Failed to delete lead", {
-            description: `Lead could not be deleted. Please try again later.`,
-        });
-        return
-    }
+const ActionsCell = ({ lead }) => {
+    const deleteLeadMutation = useDeleteLead()
 
-    const data = await response.json()
-    console.log("Lead deleted successfully", data)
-
-    toast.success("Lead Deleted successfully", {
-        description: `${data.data.name} has been removed from your leads.`
-    });
+    return (
+        <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="h-8 w-8 p-0">
+                    <span className="sr-only">Open menu</span>
+                    <MoreHorizontal className="h-4 w-4" />
+                </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+                <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                <DropdownMenuItem
+                    onClick={() => navigator.clipboard.writeText(lead.id)}
+                >
+                    Copy Lead ID
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>View Lead</DropdownMenuItem>
+                <DropdownMenuItem onClick={(e) => {
+                    e.preventDefault();
+                    if (!lead) {
+                        console.error("Lead is undefined");
+                        return;
+                    }
+                    deleteLeadMutation.mutate(lead.id);
+                }}>
+                    Delete Lead
+                </DropdownMenuItem>
+            </DropdownMenuContent>
+        </DropdownMenu>
+    )
 }
 
 export const columns = [
@@ -104,44 +149,8 @@ export const columns = [
         accessorKey: "leadSource",
         header: "Lead Source",
     },
-
     {
         id: "actions",
-        cell: ({ row }) => {
-            const lead = row.original
-
-            return (
-                <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" className="h-8 w-8 p-0">
-                            <span className="sr-only">Open menu</span>
-                            <MoreHorizontal className="h-4 w-4" />
-                        </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem
-                            onClick={() => navigator.clipboard.writeText(lead.id)}
-                        >
-                            Copy Lead ID
-                        </DropdownMenuItem>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem>View Lead</DropdownMenuItem>
-                        <DropdownMenuItem onClick={(e) => {
-                            // console.log("Delete Lead clicked"); // Debug log
-                            e.preventDefault();
-                            if (!lead) {
-                                console.error("Lead is undefined"); // Debug log
-                                return;
-                            }
-                            console.log("Del lead", lead);
-                            deleteLead(lead.id);
-                        }}>
-                            Delete Lead
-                        </DropdownMenuItem>
-                    </DropdownMenuContent>
-                </DropdownMenu>
-            )
-        },
+        cell: ({ row }) => <ActionsCell lead={row.original} />
     },
 ]

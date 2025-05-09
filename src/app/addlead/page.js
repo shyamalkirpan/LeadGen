@@ -7,6 +7,7 @@ import { Database } from "lucide-react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
@@ -55,7 +56,7 @@ const formSchema = z.object({
 
 export default function AddLeadPage() {
     const router = useRouter()
-    const [isSubmitting, setIsSubmitting] = useState(false)
+    const queryClient = useQueryClient()
 
     // Initialize form with react-hook-form
     const form = useForm({
@@ -73,11 +74,9 @@ export default function AddLeadPage() {
         },
     })
 
-    // Form submission handler
-    async function onSubmit(values) {
-        setIsSubmitting(true)
-
-        try {
+    // Create mutation for adding a lead
+    const createLeadMutation = useMutation({
+        mutationFn: async (values) => {
             const response = await fetch('/api/leads', {
                 method: 'POST',
                 headers: {
@@ -95,14 +94,19 @@ export default function AddLeadPage() {
                 }),
             });
 
-            const data = await response.json();
-
             if (!response.ok) {
-                throw new Error(data.error || 'Failed to submit lead');
+                const error = await response.json();
+                throw new Error(error.error || 'Failed to submit lead');
             }
 
+            return response.json();
+        },
+        onSuccess: (data, variables) => {
+            // Invalidate and refetch leads query
+            queryClient.invalidateQueries({ queryKey: ['data'] });
+
             toast.success("Lead added successfully", {
-                description: `${values.firstName} ${values.lastName} has been added to your leads.`
+                description: `${variables.firstName} ${variables.lastName} has been added to your leads.`
             });
 
             // Reset form
@@ -110,14 +114,17 @@ export default function AddLeadPage() {
 
             // Optionally redirect to leads list
             // router.push("/leads")
-        } catch (error) {
+        },
+        onError: (error) => {
             toast.error("Error", {
                 description: error.message || "There was a problem adding the lead. Please try again."
             });
-            console.error(error);
-        } finally {
-            setIsSubmitting(false);
         }
+    });
+
+    // Form submission handler
+    async function onSubmit(values) {
+        createLeadMutation.mutate(values);
     }
 
     return (<div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
@@ -296,8 +303,8 @@ export default function AddLeadPage() {
                         <Button variant="outline" type="button" onClick={() => form.reset()}>
                             Cancel
                         </Button>
-                        <Button type="submit" disabled={isSubmitting}>
-                            {isSubmitting ? "Saving..." : "Add Lead"}
+                        <Button type="submit" disabled={createLeadMutation.isPending}>
+                            {createLeadMutation.isPending ? "Saving..." : "Add Lead"}
                         </Button>
                     </div>
                 </form>
