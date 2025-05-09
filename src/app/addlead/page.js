@@ -103,7 +103,7 @@ export default function AddLeadPage() {
         },
         onSuccess: (data, variables) => {
             // Invalidate and refetch leads query
-            queryClient.invalidateQueries({ queryKey: ['data'] });
+            queryClient.invalidateQueries({ queryKey: ['leads'] });
 
             toast.success("Lead added successfully", {
                 description: `${variables.firstName} ${variables.lastName} has been added to your leads.`

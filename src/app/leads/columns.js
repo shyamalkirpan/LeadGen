@@ -32,7 +32,7 @@ const useDeleteLead = () => {
             return response.json()
         },
         onSuccess: (data) => {
-            queryClient.invalidateQueries({ queryKey: ['data'] })
+            queryClient.invalidateQueries({ queryKey: ['leads'] })
             toast.success("Lead Deleted successfully", {
                 description: `${data.data.name} has been removed from your leads.`
             })
