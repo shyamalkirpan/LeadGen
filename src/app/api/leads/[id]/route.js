@@ -45,4 +45,39 @@ export async function GET(request, { params }) {
     } catch (error) {
         return handleError(error, 'fetch lead');
     }
-} 
+}
+
+export async function DELETE(request, { params }) {
+    try {
+        const { id } = params;
+
+        if (!id) {
+            return NextResponse.json(
+                { error: 'Lead ID is required' },
+                { status: 400 }
+            );
+        }
+
+        const [deletedLead] = await db
+            .delete(leads)
+            .where(eq(leads.id, id))
+            .returning();
+
+        if (!deletedLead) {
+            return NextResponse.json(
+                { error: 'Lead not found' },
+                { status: 404 }
+            );
+        }
+
+        return NextResponse.json(
+            {
+                message: 'Lead deleted successfully',
+                data: deletedLead
+            },
+            { status: 200 }
+        );
+    } catch (error) {
+        return handleError(error, 'delete lead');
+    }
+}
