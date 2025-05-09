@@ -1,4 +1,5 @@
 'use client'
+import { useState } from 'react'
 import { useQuery } from "@tanstack/react-query";
 import { DataTable } from "./data-table";
 import { columns } from "./columns";
@@ -6,10 +7,13 @@ import AddNewLead from "@/components/ui/AddNewLead";
 import LeadSkeleton from "@/components/ui/LeadSkeleton";
 
 export default function LeadsPage() {
+    const [pageIndex, setPageIndex] = useState(0)
+    const [pageSize, setPageSize] = useState(10)
+
     const { isPending, error, data, isFetching } = useQuery({
-        queryKey: ['leads'],
+        queryKey: ['leads', pageIndex, pageSize],
         queryFn: async () => {
-            const response = await fetch('/api/leads')
+            const response = await fetch(`/api/leads?page=${pageIndex + 1}&pageSize=${pageSize}`)
             if (!response.ok) {
                 throw new Error('Network response was not ok')
             }
@@ -31,7 +35,15 @@ export default function LeadsPage() {
                 <p className="mt-4">You can manage your leads here.</p>
                 <AddNewLead />
                 {(isPending || isFetching) ? <LeadSkeleton /> :
-                    <DataTable columns={columns} data={data?.data || []} />}
+                    <DataTable
+                        columns={columns}
+                        data={data?.data || []}
+                        pageCount={data?.totalPages || 0}
+                        pageIndex={pageIndex}
+                        pageSize={pageSize}
+                        onPageChange={setPageIndex}
+                        onPageSizeChange={setPageSize}
+                    />}
             </div>
         </>
     )
